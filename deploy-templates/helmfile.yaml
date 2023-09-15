@@ -17,6 +17,18 @@ releases:
     - events:
       - presync
       showlogs: true
+      command: bash
+      args:
+        - -c
+        - 'oc get namespace {{`{{ .Release.Namespace }}`}} >/dev/null 2>&1 || oc create namespace {{`{{ .Release.Namespace }}`}}'
+    - events:
+      - presync
+      showlogs: true
+      command: oc
+      args: [ "label", "--overwrite", "namespace", "{{`{{.Release.Namespace}}`}}", 'name=redis-operator' ]
+    - events:
+      - presync
+      showlogs: true
       command: oc
       args:
         - adm

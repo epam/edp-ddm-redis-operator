@@ -5,8 +5,8 @@
 # Name of the image repository to pull the container image from.
 image:
   repository: quay.io/spotahome/redis-operator
-  pullPolicy: Always
-  tag: v1.1.1
+  pullPolicy: IfNotPresent
+  tag: v1.2.4
 
 imageCredentials:
   create: false
@@ -14,9 +14,14 @@ imageCredentials:
   username: someone
   password: somepassword
   email: someone@example.com
+  # Use exists secrets in namespace
+  existsSecrets:
+    - registrysecret
 
 updateStrategy:
   type: RollingUpdate
+
+replicas: 1
 
 # A name in place of the chart name for `app:` labels.
 nameOverride: ""
